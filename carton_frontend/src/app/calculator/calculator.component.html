@@ -1,0 +1,60 @@
+<div class="container" style="padding-top: 50px;">
+    <div class="row">
+        <div class="col-md-6">
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                <div class="form-group row">
+                    <label class="control-label col-md-4" for="sel1">Product:</label>
+                    <div class="col-md-8">
+                        <select name="prod" class="form-control" ngModel>
+                            <option value="" disabled selected>Select Product</option>
+                            <option *ngFor="let prod of products" [ngValue]="prod.id">{{prod.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-md-4" for="cartons">No of Cartons:</label>
+                    <div class="col-md-4">
+                        <input name="cartons" class="form-control" type="number" [(ngModel)]="cartons" required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-md-4" for="unit">No of Units:</label>
+                    <div class="col-md-4">
+                        <input name="units" class="form-control" type="number" [(ngModel)]="units" required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
+                        <button class="btn btn-success btn-lg btn-block" type="submit">Calculate</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 50px;">
+        <div *ngIf="priceResponse" class="col-md-6">
+            <table class="table table-striped table-bordered" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th colspan="2">Cost Estimation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>No Cartons</td>
+                        <td>{{priceResponse.cartons==0?"-":priceResponse.cartons}}</td>
+                    </tr>
+                    <tr>
+                        <td>No of Single Units</td>
+                        <td>{{priceResponse.units==0?"-":priceResponse.units}}</td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td>{{priceResponse.price| currency:'LKR '}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
